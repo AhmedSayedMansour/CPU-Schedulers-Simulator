@@ -65,7 +65,7 @@ public class processInputs extends javax.swing.JFrame {
             }
         });
 
-        colorSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-----Select item----]", "red", "yellow", "blue", "green", "pink", "black", "orange" }));
+        colorSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[-----Select item----]", "red", "yellow", "blue", "green", "pink", "black", "orange", "turquoise", "silver" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

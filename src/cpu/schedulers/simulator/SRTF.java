@@ -3,47 +3,52 @@ package cpu.schedulers.simulator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 public class SRTF {
     int context;
     ArrayList<Integer> arrivalTimes = new ArrayList<>();
-    static ArrayList<save> processes = new ArrayList<save>();
-    ArrayList<Process> pro = new ArrayList<Process>();
-    ArrayList<Process> ready = new ArrayList<Process>();
-    int AWT = 0;        //average waiting time
-    int ATAT = 0;       //average turn around time
+    HashMap<String,Integer> BurstTimes = new HashMap<>();       //burst time for each process
+    static ArrayList<save> processes = new ArrayList<save>();   //output
+    ArrayList<Process> pro = new ArrayList<Process>();          //input
+    ArrayList<Process> ready = new ArrayList<Process>();        //ready queue
+    double AWT = 0;        //average waiting time
+    double ATAT = 0;       //average turn around time
     
-    SRTF(/*Input in*/){
+    SRTF(Input in){
      
-        context = 2;//in.timeContext;
-        /*for(int i=0 ; i<in.numberOfProcesses ; i++)
+        context = in.timeContext;
+        for(int i=0 ; i<in.numberOfProcesses ; i++)
         { 
             arrivalTimes.add(in.arrivalTimes.get(i));
+            BurstTimes.put(in.names.get(i), in.burstTimes.get(i));
             pro.add( new Process(in.names.get(i),in.colors.get(i),in.arrivalTimes.get(i),in.burstTimes.get(i)));
-        }*/
-        
+        }
+        /*
         arrivalTimes.add(0);
         arrivalTimes.add(1);
         arrivalTimes.add(2);
         arrivalTimes.add(2);
         arrivalTimes.add(4);
+        BurstTimes.put("p1", 3);
+        BurstTimes.put("p2", 5);
+        BurstTimes.put("p3", 7);
+        BurstTimes.put("p4", 10);
+        BurstTimes.put("p5", 2);
         pro.add( new Process("p1","red",0,3));
         pro.add( new Process("p2","red",1,5));
         pro.add( new Process("p3","red",2,7));
         pro.add( new Process("p4","red",2,10));
         pro.add( new Process("p5","red",4,2));
-
+        */
         Run();
     }
-
-    SRTF(Input in) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     class save{
         String name , color; 
         int arr = 0 , burst=0;
         int BT , ET;        //Begin time , End time
-        Double WT=0.0,TAT=0.0;
+        double WT=0,TAT=0;  //waiting time , turn around time
         save(String a , String col, int b , int c ,int ar , int burs){name = a; color = col ;BT = b ; ET = c; arr = ar; burst=burs;}
         public void setCon(int a , int b){BT = a ;ET = b;}
     }
@@ -93,13 +98,36 @@ public class SRTF {
                 processes.remove(i+1);
             }
         }
-        //processes.sort(comparator3);
         for(int i=0 ; i < processes.size();++i){        //printing
             processes.get(i).setCon(processes.get(i).BT + i*context, processes.get(i).ET + i*context);
-            //processes.get(i).TAT = Double.parseDouble(Integer.toString(processes.get(i).ET - processes.get(i).arr)) ;
-            //processes.get(i).WT  = processes.get(i).TAT - Double.parseDouble(Integer.toString(processes.get(i).burst)) ;
-            save o = processes.get(i);
-            System.out.println(o.name+ " "+o.color + " "+ o.BT+" " +  o.ET +" " +o.TAT +" " + o.WT);
+            processes.get(i).TAT = Double.parseDouble(Integer.toString(processes.get(i).ET - processes.get(i).arr)) ;
+            processes.get(i).WT  = processes.get(i).TAT - BurstTimes.get(processes.get(i).name) ;
         }
+        processes.sort(comparator3);
+        for (int i=0 ; i < processes.size() ; ++i){
+            double valWT = processes.get(i).WT;
+            double valTAT = processes.get(i).TAT;
+            if( i!=processes.size()-1){
+                while(processes.get(i).name.matches(processes.get(i+1).name)){
+                    valWT = processes.get(i+1).WT;
+                    valTAT = processes.get(i+1).TAT;
+                    i++;
+                }
+            }
+            AWT+=valWT;
+            ATAT+=valTAT;
+        }
+        AWT/=arrivalTimes.size();
+        ATAT/=arrivalTimes.size();
+        /*************printing*************/
+        /*
+        System.out.println("name color begin end WT TAT");
+        for(int i=0 ; i < processes.size();++i){
+            save o = processes.get(i);
+            System.out.println(o.name+ " "+o.color + " "+ o.BT+" " +  o.ET +" " +o.WT +" " + o.TAT);
+        }
+        System.out.println("AWT = " + AWT);
+        System.out.println("ATAT = " + ATAT);
+        */
     }
 }

@@ -19,6 +19,8 @@ public class Graphical_representation extends javax.swing.JFrame {
     globalInput obj = new globalInput();
     NP_SJF tech1 = new NP_SJF(obj.in);
     SRTF tech2 = new SRTF(obj.in);
+    PriorityScheduling tech3 = new PriorityScheduling(obj.in);
+    AG tech4 = new AG(obj.in);
     DefaultTableModel model;
     /**
      * Creates new form Graphical_representation
@@ -308,6 +310,10 @@ public class Graphical_representation extends javax.swing.JFrame {
                 labIcon.setSize( tech1.processes.get(i).burstTime*20 ,15);
                 shift += tech1.processes.get(i).burstTime*20;
             }
+            /*AWT*/
+            AWT.setText(String.format( "%.3f", tech2.AWT));
+            /*ATAT*/
+            ATAT.setText(String.format( "%.3f", tech2.ATAT));
         }
         else {
             /*AWT*/
