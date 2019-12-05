@@ -93,9 +93,12 @@ public class SRTF {
             processes.add(new save( ready.get(i).name, ready.get(i).color, processes.get(processes.size()-1).ET, ready.get(i).bt +processes.get(processes.size()-1).ET , ready.get(i).art , ready.get(i).bt) );
         }
         for (int i=0 ; i < processes.size()-1 ; ++i){
-            while(processes.get(i).name.matches(processes.get(i+1).name)){
-                processes.set(i, new save(processes.get(i).name, processes.get(i).color, processes.get(i).BT, processes.get(i+1).ET , processes.get(i).arr ,processes.get(i).burst ));
-                processes.remove(i+1);
+            if( i != processes.size()-1 ){
+                while(processes.get(i).name.matches(processes.get(i+1).name)){
+                    processes.set(i, new save(processes.get(i).name, processes.get(i).color, processes.get(i).BT, processes.get(i+1).ET , processes.get(i).arr ,processes.get(i).burst ));
+                    processes.remove(i+1);
+                    if( i == processes.size()-1 )   break;
+                }
             }
         }
         for(int i=0 ; i < processes.size();++i){        //printing
@@ -112,6 +115,7 @@ public class SRTF {
                     valWT = processes.get(i+1).WT;
                     valTAT = processes.get(i+1).TAT;
                     i++;
+                    if (i == processes.size()-1 )break;
                 }
             }
             AWT+=valWT;

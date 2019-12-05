@@ -1,6 +1,7 @@
 package cpu.schedulers.simulator;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -85,11 +86,12 @@ public class AG {
         return (int)Math.ceil(this.quantumTime/2.0);
     }
 
-    private  void saveProcess(int AT, int BT,String name){
+    private  void saveProcess(int AT, int BT,String name , String color){
         save tmp = new save();
         tmp.AT = AT;
         tmp.BT = BT;
         tmp.name = name;
+        tmp.color = color;
         outPut.add(tmp);
     }
 
@@ -123,11 +125,11 @@ public class AG {
             currentTime += currentProcess.run(currentProcess.halfQuantum());
             updateReady(currentTime);
             updateNON(currentTime);
-            if(!isAlive(currentProcess)) {saveProcess(processStart,currentTime,currentProcess.name); currentProcess = null;}
+            if(!isAlive(currentProcess)) {saveProcess(processStart,currentTime,currentProcess.name , currentProcess.Color); currentProcess = null;}
             ////non preemptive
             if (currentProcess!=null && Available.size()>1 && !Available.get(0).equals(currentProcess)){
                 currentProcess.dealQuantum();
-                saveProcess(processStart,currentTime,currentProcess.name);
+                saveProcess(processStart,currentTime,currentProcess.name , currentProcess.Color);
                 processStart = currentTime;
                 currentProcess = Available.get(0);
                 continue;
@@ -138,21 +140,21 @@ public class AG {
                 updateNON(currentTime);
 
                 if(!isAlive(currentProcess)) {
-                    saveProcess(processStart,currentTime,currentProcess.name);
+                    saveProcess(processStart,currentTime,currentProcess.name , currentProcess.Color);
                     currentProcess = null;
                     break;
                     }
 
                     else if (currentProcess.fullQuantum()) {
                     currentProcess.dealQuantum();
-                    saveProcess(processStart,currentTime,currentProcess.name);
+                    saveProcess(processStart,currentTime,currentProcess.name , currentProcess.Color);
                     processStart =currentTime;
                     currentProcess = ReadyProcess.remove();
                     break;
                     }
 
                     else if (!Available.get(0).equals(currentProcess)){
-                    saveProcess(processStart,currentTime,currentProcess.name);
+                    saveProcess(processStart,currentTime,currentProcess.name , currentProcess.Color);
                     processStart = currentTime;
                     currentProcess.dealQuantum();
                     currentProcess = Available.get(0);
@@ -189,6 +191,7 @@ public class AG {
             tmp.setPriority(input.priorityNumbers.get(i));
             tmp.setQuantumTime(input.timeQuantum);
             tmp.name = input.names.get(i);
+            tmp.Color = input.colors.get(i);
             tmp.setAGFactor();
             ///tmp is ready
             processes.add(tmp);
@@ -198,6 +201,15 @@ public class AG {
         sort();
         for (int i=0; i<processes.size(); i++)
         processesAWT.add(new AG(processes.get(i).arrivalTime,processes.get(i).burstTime,processes.get(i).name));
+        outPut = SolveAG();
+        outPut.sort(Comparator.comparing(save->save.name));
+        /*
+        System.out.println("name color begin end WT TAT");
+        for(int i=0 ; i < outPut.size();++i){
+            AG.save o = outPut.get(i);
+            System.out.println(o.name+ " "+o.color + " "+ o.AT+" " +  o.BT);
+        }
+        */
     }
     public double getAwt(){
         double AWT =0;

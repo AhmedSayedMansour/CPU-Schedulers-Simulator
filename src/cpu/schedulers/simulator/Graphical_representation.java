@@ -5,8 +5,7 @@
  */
 package cpu.schedulers.simulator;
 
-import com.sun.corba.se.spi.extension.ServantCachingPolicy;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -16,11 +15,19 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class Graphical_representation extends javax.swing.JFrame {
+    
     globalInput obj = new globalInput();
     NP_SJF tech1 = new NP_SJF(obj.in);
     SRTF tech2 = new SRTF(obj.in);
     PriorityScheduling tech3 = new PriorityScheduling(obj.in);
     AG tech4 = new AG(obj.in);
+    /*
+    Input in = new Input();
+    NP_SJF tech1 = new NP_SJF(in);
+    SRTF tech2 = new SRTF(in);
+    PriorityScheduling tech3 = new PriorityScheduling(in);
+    AG tech4 = new AG(in);
+    */
     DefaultTableModel model;
     /**
      * Creates new form Graphical_representation
@@ -39,105 +46,42 @@ public class Graphical_representation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblData = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        run = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         NP_SJF = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane3 = new javax.swing.JScrollPane();
         SRTF = new javax.swing.JPanel();
+        jSeparator5 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        NP_PS = new javax.swing.JPanel();
+        jSeparator3 = new javax.swing.JSeparator();
         jScrollPane4 = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
+        AG = new javax.swing.JPanel();
+        jSeparator4 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tblData = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        AWT = new javax.swing.JTextField();
         ATAT = new javax.swing.JTextField();
-        run = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        AWT = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Graphical representation");
         setAutoRequestFocus(false);
 
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseClicked(evt);
-            }
-        });
+        jPanel2.setBackground(new java.awt.Color(50, 53, 55));
 
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        javax.swing.GroupLayout NP_SJFLayout = new javax.swing.GroupLayout(NP_SJF);
-        NP_SJF.setLayout(NP_SJFLayout);
-        NP_SJFLayout.setHorizontalGroup(
-            NP_SJFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(NP_SJFLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(736, Short.MAX_VALUE))
-        );
-        NP_SJFLayout.setVerticalGroup(
-            NP_SJFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
-        );
-
-        jScrollPane2.setViewportView(NP_SJF);
-
-        jTabbedPane1.addTab("NP_SJF", jScrollPane2);
-
-        javax.swing.GroupLayout SRTFLayout = new javax.swing.GroupLayout(SRTF);
-        SRTF.setLayout(SRTFLayout);
-        SRTFLayout.setHorizontalGroup(
-            SRTFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
-        );
-        SRTFLayout.setVerticalGroup(
-            SRTFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
-        );
-
-        jScrollPane3.setViewportView(SRTF);
-
-        jTabbedPane1.addTab("SRTF", jScrollPane3);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 423, Short.MAX_VALUE)
-        );
-
-        jScrollPane1.setViewportView(jPanel1);
-
-        jTabbedPane1.addTab("NP_PS", jScrollPane1);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
-        );
-
-        jScrollPane4.setViewportView(jPanel4);
-
-        jTabbedPane1.addTab("AG", jScrollPane4);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel1.setText("CPU Scheduling Graph");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 0, 51));
+        jLabel2.setText("Process Information");
 
         tblData.setAutoCreateRowSorter(true);
         tblData.setModel(new javax.swing.table.DefaultTableModel(
@@ -159,21 +103,8 @@ public class Graphical_representation extends javax.swing.JFrame {
         tblData.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane5.setViewportView(tblData);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel2.setText("Process Information");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel3.setText("Statistics");
-
-        jLabel4.setText("AWT  :");
-
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("ATAT :");
-
-        AWT.setEditable(false);
-
-        ATAT.setEditable(false);
 
         run.setText("RUN");
         run.addActionListener(new java.awt.event.ActionListener() {
@@ -182,66 +113,218 @@ public class Graphical_representation extends javax.swing.JFrame {
             }
         });
 
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout NP_SJFLayout = new javax.swing.GroupLayout(NP_SJF);
+        NP_SJF.setLayout(NP_SJFLayout);
+        NP_SJFLayout.setHorizontalGroup(
+            NP_SJFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NP_SJFLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1047, Short.MAX_VALUE))
+        );
+        NP_SJFLayout.setVerticalGroup(
+            NP_SJFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+        );
+
+        jScrollPane2.setViewportView(NP_SJF);
+
+        jTabbedPane1.addTab("NP_SJF", jScrollPane2);
+
+        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout SRTFLayout = new javax.swing.GroupLayout(SRTF);
+        SRTF.setLayout(SRTFLayout);
+        SRTFLayout.setHorizontalGroup(
+            SRTFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SRTFLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1047, Short.MAX_VALUE))
+        );
+        SRTFLayout.setVerticalGroup(
+            SRTFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+        );
+
+        jScrollPane3.setViewportView(SRTF);
+
+        jTabbedPane1.addTab("SRTF", jScrollPane3);
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout NP_PSLayout = new javax.swing.GroupLayout(NP_PS);
+        NP_PS.setLayout(NP_PSLayout);
+        NP_PSLayout.setHorizontalGroup(
+            NP_PSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NP_PSLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1047, Short.MAX_VALUE))
+        );
+        NP_PSLayout.setVerticalGroup(
+            NP_PSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1109, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(NP_PS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 523, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(NP_PS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jScrollPane1.setViewportView(jPanel1);
+
+        jTabbedPane1.addTab("NP_PS", jScrollPane1);
+
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout AGLayout = new javax.swing.GroupLayout(AG);
+        AG.setLayout(AGLayout);
+        AGLayout.setHorizontalGroup(
+            AGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AGLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1047, Short.MAX_VALUE))
+        );
+        AGLayout.setVerticalGroup(
+            AGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1109, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(AG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 523, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(AG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jScrollPane4.setViewportView(jPanel4);
+
+        jTabbedPane1.addTab("AG", jScrollPane4);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 0, 51));
+        jLabel1.setText("CPU Scheduling Graph");
+
+        ATAT.setEditable(false);
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("AWT  :");
+
+        AWT.setEditable(false);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 0, 51));
+        jLabel3.setText("Statistics");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4))
+                                .addGap(39, 39, 39)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(AWT, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ATAT, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(run, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(run, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel5))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(38, 38, 38)
+                                    .addComponent(ATAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(AWT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(600, 600, 600))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(46, 46, 46)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(AWT)
-                                            .addComponent(ATAT, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(run, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(AWT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(run, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(ATAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -250,6 +333,7 @@ public class Graphical_representation extends javax.swing.JFrame {
     
     private void runActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runActionPerformed
         // TODO add your handling code here:
+        
         model.setRowCount(0);
         /*Technique 1*/
         JLabel labName;
@@ -285,7 +369,7 @@ public class Graphical_representation extends javax.swing.JFrame {
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         // TODO add your handling code here:
         int sel = jTabbedPane1.getSelectedIndex();
-        if(sel == 0){
+        if(sel == 0){                       /*Technique 1*/
             /*AWT*/
             AWT.setText(String.format( "%.3f", tech1.averageWaitingTime));
             /*ATAT*/
@@ -296,30 +380,112 @@ public class Graphical_representation extends javax.swing.JFrame {
             JLabel labName;
             JLabel labIcon;
             int pos = 50;
-            int shift = 0;
+            int savex = 0;
+            boolean check = false;
             for(int i=0 ; i<tech2.processes.size() ; ++i){
                 labName = new JLabel();
                 labIcon = new JLabel();
                 labName.setText(tech2.processes.get(i).name);
                 SRTF.add(labName);
-                labName.setBounds(new Rectangle(new Point(10,i*pos+10) , labName.getPreferredSize()));
-
-                labIcon.setIcon(new ImageIcon("D:\\Education\\Java\\CPU-Schedulers-Simulator\\colors" + "\\"+ tech2.processes.get(i).color + ".jpg"));
-                SRTF.add(labIcon);
-                labIcon.setBounds(new Rectangle(new Point(60 + shift ,i*pos+10) , labIcon.getPreferredSize()));
-                labIcon.setSize( tech1.processes.get(i).burstTime*20 ,15);
-                shift += tech1.processes.get(i).burstTime*20;
+                labName.setBounds(new Rectangle(new Point(10,savex*pos+10) , labName.getPreferredSize()));
+                if(i != tech2.processes.size()-1){
+                    labIcon = new JLabel();
+                    labIcon.setIcon(new ImageIcon("D:\\Education\\Java\\CPU-Schedulers-Simulator\\colors" + "\\"+ tech2.processes.get(i).color + ".jpg"));
+                    SRTF.add(labIcon);
+                    labIcon.setBounds(new Rectangle(new Point(60 + tech2.processes.get(i).BT *20 , savex*pos +10 ) , labIcon.getPreferredSize()));
+                    labIcon.setSize((tech2.processes.get(i).ET - tech2.processes.get(i).BT) *20 ,15);
+                    while(tech2.processes.get(i).name.matches(tech2.processes.get(i+1).name)){
+                        check = true;
+                        i++;
+                        labIcon = new JLabel();
+                        labIcon.setIcon(new ImageIcon("D:\\Education\\Java\\CPU-Schedulers-Simulator\\colors" + "\\"+ tech2.processes.get(i).color + ".jpg"));
+                        SRTF.add(labIcon);
+                        labIcon.setBounds(new Rectangle(new Point(60 + tech2.processes.get(i).BT *20 , savex*pos +10) , labIcon.getPreferredSize()));
+                        labIcon.setSize((tech2.processes.get(i).ET - tech2.processes.get(i).BT) *20 ,15);
+                        if(i == tech2.processes.size()-1) break;
+                    }
+                    savex++;
+                }
+                else
+                {
+                    labIcon = new JLabel();
+                    labIcon.setIcon(new ImageIcon("D:\\Education\\Java\\CPU-Schedulers-Simulator\\colors" + "\\"+ tech2.processes.get(i).color + ".jpg"));
+                    SRTF.add(labIcon);
+                    labIcon.setBounds(new Rectangle(new Point(60 + tech2.processes.get(i).BT *20 , savex*pos +10 ) , labIcon.getPreferredSize()));
+                    labIcon.setSize((tech2.processes.get(i).ET - tech2.processes.get(i).BT) *20 ,15);
+                }
             }
             /*AWT*/
             AWT.setText(String.format( "%.3f", tech2.AWT));
             /*ATAT*/
             ATAT.setText(String.format( "%.3f", tech2.ATAT));
         }
-        else {
+        else if(sel == 2)  {                    /*Technique 3*/
+            JLabel labName;
+            int pos = 50;
+            int shift = 0;
+            JLabel labIcon;
+            for(int i=0 ; i<tech3.save.size() ; ++i){
+                labName = new JLabel();
+                labIcon = new JLabel();
+                labName.setText(tech3.save.get(i).name);
+                NP_PS.add(labName);
+                labName.setBounds(new Rectangle(new Point(10,i*pos+10) , labName.getPreferredSize()));
+
+                labIcon.setIcon(new ImageIcon("D:\\Education\\Java\\CPU-Schedulers-Simulator\\colors" + "\\"+ tech3.save.get(i).color + ".jpg"));
+                NP_PS.add(labIcon);
+                labIcon.setBounds(new Rectangle(new Point(60 + tech3.save.get(i).ST*20 ,i*pos+10) , labIcon.getPreferredSize()));
+                labIcon.setSize( (tech3.save.get(i).CT - tech3.save.get(i).ST)*20 ,15);
+                shift += (tech3.save.get(i).CT - tech3.save.get(i).ST)*20;
+            }
             /*AWT*/
-            AWT.setText("0");
+            AWT.setText(String.format( "%.3f", tech3.AWT));
             /*ATAT*/
-            ATAT.setText("0");
+            ATAT.setText(String.format( "%.3f", tech3.ATAT));
+        }
+        else if(sel == 3){                                   /*Technique 4*/
+            JLabel labName;
+            JLabel labIcon;
+            int pos = 50;
+            int savex = 0;
+            boolean check = false;
+            for(int i=0 ; i<tech4.outPut.size() ; ++i){
+                labName = new JLabel();
+                labIcon = new JLabel();
+                labName.setText(tech4.outPut.get(i).name);
+                AG.add(labName);
+                labName.setBounds(new Rectangle(new Point(10,savex*pos+10) , labName.getPreferredSize()));
+                if(i != tech4.outPut.size()-1){
+                    labIcon = new JLabel();
+                    labIcon.setIcon(new ImageIcon("D:\\Education\\Java\\CPU-Schedulers-Simulator\\colors" + "\\"+ tech4.outPut.get(i).color + ".jpg"));
+                    AG.add(labIcon);
+                    labIcon.setBounds(new Rectangle(new Point(60 + tech4.outPut.get(i).AT *20 , savex*pos +10 ) , labIcon.getPreferredSize()));
+                    labIcon.setSize((tech4.outPut.get(i).BT - tech4.outPut.get(i).AT) *20 ,15);
+                    while(tech4.outPut.get(i).name.matches(tech4.outPut.get(i+1).name)){
+                        check = true;
+                        i++;
+                        labIcon = new JLabel();
+                        labIcon.setIcon(new ImageIcon("D:\\Education\\Java\\CPU-Schedulers-Simulator\\colors" + "\\"+ tech4.outPut.get(i).color + ".jpg"));
+                        AG.add(labIcon);
+                        labIcon.setBounds(new Rectangle(new Point(60 + tech4.outPut.get(i).AT *20 , savex*pos +10) , labIcon.getPreferredSize()));
+                        labIcon.setSize((tech4.outPut.get(i).BT - tech4.outPut.get(i).AT) *20 ,15);
+                        if(i == tech4.outPut.size()-1) break;
+                    }
+                    savex++;
+                }
+                else
+                {
+                    labIcon = new JLabel();
+                    labIcon.setIcon(new ImageIcon("D:\\Education\\Java\\CPU-Schedulers-Simulator\\colors" + "\\"+ tech4.outPut.get(i).color + ".jpg"));
+                    AG.add(labIcon);
+                    labIcon.setBounds(new Rectangle(new Point(60 + tech4.outPut.get(i).AT *20 , savex*pos +10 ) , labIcon.getPreferredSize()));
+                    labIcon.setSize((tech4.outPut.get(i).BT - tech4.outPut.get(i).AT) *20 ,15);
+                }
+            }
+            /*AWT*/
+            AWT.setText(String.format( "%.3f", tech4.getAwt()));
+            /*ATAT*/
+            ATAT.setText(String.format( "%.3f", tech4.getATAT()));
         }
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
@@ -359,8 +525,10 @@ public class Graphical_representation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AG;
     private javax.swing.JTextField ATAT;
     private javax.swing.JTextField AWT;
+    private javax.swing.JPanel NP_PS;
     private javax.swing.JPanel NP_SJF;
     private javax.swing.JPanel SRTF;
     private javax.swing.JLabel jLabel1;
@@ -369,6 +537,7 @@ public class Graphical_representation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -376,6 +545,9 @@ public class Graphical_representation extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton run;
     private javax.swing.JTable tblData;
