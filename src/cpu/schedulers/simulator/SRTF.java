@@ -80,13 +80,15 @@ public class SRTF {
                 else    flag = false;
             }
             ready.sort(comparator2);
-            processes.add(new save( ready.get(0).name, ready.get(0).color, i, i+1 , ready.get(0).art ,ready.get(0).bt) );
-            Process neew = ready.get(0);
-            neew.bt-- ;
-            if(neew.bt == 0){
-                ready.remove(0);
+            if(ready.size()>0){
+                processes.add(new save( ready.get(0).name, ready.get(0).color, i, i+1 , ready.get(0).art ,ready.get(0).bt) );
+                Process neew = ready.get(0);
+                neew.bt-- ;
+                if(neew.bt == 0){
+                    ready.remove(0);
+                }
+                else    ready.set(0 ,neew);
             }
-            else    ready.set(0 ,neew);
         }
         ready.sort(comparator2);
         for (int i=0 ;i < ready.size(); ++i){

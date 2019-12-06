@@ -35,6 +35,7 @@ public class Graphical_representation extends javax.swing.JFrame {
     public Graphical_representation() {
         initComponents();
         model = (DefaultTableModel) tblData.getModel();
+        panelHistory.setVisible(false);
     }
 
     /**
@@ -72,6 +73,10 @@ public class Graphical_representation extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         AWT = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        panelHistory = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        textHistory = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Graphical representation");
@@ -256,6 +261,33 @@ public class Graphical_representation extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(204, 0, 51));
         jLabel3.setText("Statistics");
 
+        textHistory.setColumns(20);
+        textHistory.setRows(5);
+        jScrollPane6.setViewportView(textHistory);
+
+        jLabel6.setText("Quantum history");
+
+        javax.swing.GroupLayout panelHistoryLayout = new javax.swing.GroupLayout(panelHistory);
+        panelHistory.setLayout(panelHistoryLayout);
+        panelHistoryLayout.setHorizontalGroup(
+            panelHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHistoryLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(170, 170, 170))
+            .addGroup(panelHistoryLayout.createSequentialGroup()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelHistoryLayout.setVerticalGroup(
+            panelHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHistoryLayout.createSequentialGroup()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -276,6 +308,8 @@ public class Graphical_representation extends javax.swing.JFrame {
                                     .addComponent(ATAT, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
                         .addComponent(run, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -312,8 +346,9 @@ public class Graphical_representation extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addGap(38, 38, 38)
                                     .addComponent(ATAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(AWT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                                .addComponent(AWT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(panelHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -333,7 +368,7 @@ public class Graphical_representation extends javax.swing.JFrame {
     
     private void runActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runActionPerformed
         // TODO add your handling code here:
-        
+        panelHistory.setVisible(false);
         model.setRowCount(0);
         /*Technique 1*/
         JLabel labName;
@@ -370,6 +405,7 @@ public class Graphical_representation extends javax.swing.JFrame {
         // TODO add your handling code here:
         int sel = jTabbedPane1.getSelectedIndex();
         if(sel == 0){                       /*Technique 1*/
+            panelHistory.setVisible(false);
             /*AWT*/
             AWT.setText(String.format( "%.3f", tech1.averageWaitingTime));
             /*ATAT*/
@@ -377,6 +413,7 @@ public class Graphical_representation extends javax.swing.JFrame {
         }
         else if(sel == 1)                   /*Technique 2*/
         {
+            panelHistory.setVisible(false);
             JLabel labName;
             JLabel labIcon;
             int pos = 50;
@@ -421,6 +458,7 @@ public class Graphical_representation extends javax.swing.JFrame {
             ATAT.setText(String.format( "%.3f", tech2.ATAT));
         }
         else if(sel == 2)  {                    /*Technique 3*/
+            panelHistory.setVisible(false);
             JLabel labName;
             int pos = 50;
             int shift = 0;
@@ -444,6 +482,7 @@ public class Graphical_representation extends javax.swing.JFrame {
             ATAT.setText(String.format( "%.3f", tech3.ATAT));
         }
         else if(sel == 3){                                   /*Technique 4*/
+            panelHistory.setVisible(true);
             JLabel labName;
             JLabel labIcon;
             int pos = 50;
@@ -481,6 +520,13 @@ public class Graphical_representation extends javax.swing.JFrame {
                     labIcon.setBounds(new Rectangle(new Point(60 + tech4.outPut.get(i).AT *20 , savex*pos +10 ) , labIcon.getPreferredSize()));
                     labIcon.setSize((tech4.outPut.get(i).BT - tech4.outPut.get(i).AT) *20 ,15);
                 }
+            }
+            /*Quantum history*/
+            if(tech4.quantumHistory.size() == 0){
+                textHistory.setText("No History");
+            }
+            for (int i=0; i<tech4.quantumHistory.size(); i++){
+                textHistory.setText(textHistory.getText()+(tech4.quantumHistory.get(i).name +" "+tech4.quantumHistory.get(i).quantumTime)+"\n");
             }
             /*AWT*/
             AWT.setText(String.format( "%.3f", tech4.getAwt()));
@@ -536,6 +582,7 @@ public class Graphical_representation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -544,12 +591,15 @@ public class Graphical_representation extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel panelHistory;
     private javax.swing.JButton run;
     private javax.swing.JTable tblData;
+    private javax.swing.JTextArea textHistory;
     // End of variables declaration//GEN-END:variables
 }

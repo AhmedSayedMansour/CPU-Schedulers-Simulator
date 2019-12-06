@@ -5,8 +5,10 @@ import java.util.*;
 public class PriorityScheduling {
 
     class save {
+
         String name, color;
         int ST, CT, WT, TT;
+
         public void setData(String a, String col, int b, int c, int d, int e) {
             name = a;
             color = col;
@@ -18,8 +20,10 @@ public class PriorityScheduling {
     }
 
     class Process {
+
         String name, color;
         int AT, BT, p;
+
         public void setData(String a, String col, int b, int c, int d) {
             name = a;
             color = col;
@@ -27,11 +31,14 @@ public class PriorityScheduling {
             BT = c;
             p = d;
         }
+
     }
 
     class MyComparator implements Comparator {
+
         @Override
         public int compare(Object o1, Object o2) {
+
             Process p1 = (Process) o1;
             Process p2 = (Process) o2;
             if (p1.AT < p2.AT) {
@@ -47,6 +54,7 @@ public class PriorityScheduling {
     }
 
     class comp implements Comparator {
+
         @Override
         public int compare(Object o1, Object o2) {
             Process p1 = (Process) o1;
@@ -59,6 +67,7 @@ public class PriorityScheduling {
                 return 1;
             }
         }
+
     }
     Double ATAT = 0.0, AWT = 0.0;
     ArrayList<Process> process = new ArrayList<>();
@@ -68,15 +77,18 @@ public class PriorityScheduling {
     PriorityScheduling(Input in) {
         n = in.numberOfProcesses;
         for (int i = 0; i < n; i++) {
+
             Process a = new Process();
             a.setData(in.names.get(i), in.colors.get(i), in.arrivalTimes.get(i), in.burstTimes.get(i), in.priorityNumbers.get(i));
             process.add(a);
+
         }
         run();
         for (int i = 0; i < n; i++) {
             ATAT += save.get(i).TT;
             AWT += save.get(i).WT;
         }
+
         ATAT /= n;
         AWT /= n;
     }
@@ -89,6 +101,7 @@ public class PriorityScheduling {
 
             readyqueue.add(process.get(i));
         }
+
         time = readyqueue.peek().AT;
         while (!readyqueue.isEmpty()) {
 
@@ -96,6 +109,9 @@ public class PriorityScheduling {
                 Process a = readyqueue.peek();
                 if (a.AT <= time) {
                     readyqueue.remove();
+                    if (a.p > 5) {
+                        a.p--;
+                    }
                     WorkQueue.add(a);
                 } else {
                     break;
@@ -106,14 +122,12 @@ public class PriorityScheduling {
             b.setData(c.name, c.color, time, time + c.BT, time - c.AT, (time + c.BT) - c.AT);
             save.add(b);
             time = time + c.BT;
+            while (!WorkQueue.isEmpty()) {
+                Process a = WorkQueue.poll();
+                readyqueue.add(a);
+            }
         }
-        while (!WorkQueue.isEmpty()) {
-            Process a = WorkQueue.poll();
-            save b = new save();
-            b.setData(a.name, a.color, time, (time + a.BT), (time - a.AT), (time + a.BT) - a.AT);
-            save.add(b);
-            time = time + a.BT;
-        }
-        save.sort(Comparator.comparing(save->save.name));
+
     }
+
 }

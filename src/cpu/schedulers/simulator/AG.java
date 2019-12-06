@@ -20,6 +20,7 @@ public class AG {
     ArrayList<AG>processesAWT = new ArrayList<AG>();
     ArrayList<AG>Available = new ArrayList<AG>();
     ArrayList<save>outPut = new ArrayList<save>();
+    ArrayList<AG> quantumHistory = new ArrayList<AG>();
 
     class save{
         String name , color;
@@ -72,9 +73,21 @@ public class AG {
     }
 
     private void dealQuantum(){//incase of switching
-        if (this.Worked == this.quantumTime)this.quantumTime += Math.ceil(this.quantumTime*0.10);
-        else if (this.Worked<this.quantumTime)this.quantumTime += (this.quantumTime-this.Worked);
-        this.Worked = 0;
+        if (this.Worked == this.quantumTime){
+            this.quantumTime += Math.ceil(this.quantumTime*0.10);
+            AG process = new AG();
+            process.name = this.name;
+            process.quantumTime = this.quantumTime;
+            quantumHistory.add(process);
+        }
+        else if (this.Worked<this.quantumTime){
+            this.quantumTime += (this.quantumTime-this.Worked);
+            this.Worked = 0;
+            AG process = new AG();
+            process.name = this.name;
+            process.quantumTime = this.quantumTime;
+            quantumHistory.add(process);
+        }
     }
     private void updateReady(int currentTime){
         for (int i=0; i<processes.size(); i++){
@@ -86,7 +99,7 @@ public class AG {
         return (int)Math.ceil(this.quantumTime/2.0);
     }
 
-    private  void saveProcess(int AT, int BT,String name , String color){
+    private  void saveProcess(int AT, int BT,String name,String color){
         save tmp = new save();
         tmp.AT = AT;
         tmp.BT = BT;
@@ -125,11 +138,15 @@ public class AG {
             currentTime += currentProcess.run(currentProcess.halfQuantum());
             updateReady(currentTime);
             updateNON(currentTime);
-            if(!isAlive(currentProcess)) {saveProcess(processStart,currentTime,currentProcess.name , currentProcess.Color); currentProcess = null;}
+            if(!isAlive(currentProcess)) {saveProcess(processStart,currentTime,currentProcess.name,currentProcess.Color); currentProcess = null;}
             ////non preemptive
             if (currentProcess!=null && Available.size()>1 && !Available.get(0).equals(currentProcess)){
                 currentProcess.dealQuantum();
-                saveProcess(processStart,currentTime,currentProcess.name , currentProcess.Color);
+                AG test = new AG();
+                test.quantumTime = currentProcess.quantumTime;
+                test.name = currentProcess.name;
+                quantumHistory.add(test);
+                saveProcess(processStart,currentTime,currentProcess.name,currentProcess.Color);
                 processStart = currentTime;
                 currentProcess = Available.get(0);
                 continue;
@@ -140,23 +157,33 @@ public class AG {
                 updateNON(currentTime);
 
                 if(!isAlive(currentProcess)) {
-                    saveProcess(processStart,currentTime,currentProcess.name , currentProcess.Color);
+                    saveProcess(processStart,currentTime,currentProcess.name,currentProcess.Color);
                     currentProcess = null;
                     break;
                     }
 
                     else if (currentProcess.fullQuantum()) {
                     currentProcess.dealQuantum();
-                    saveProcess(processStart,currentTime,currentProcess.name , currentProcess.Color);
+                    AG test = new AG();
+                    test.quantumTime = currentProcess.quantumTime;
+                    test.name = currentProcess.name;
+                    quantumHistory.add(test);
+                    quantumHistory.add(currentProcess);
+                    saveProcess(processStart,currentTime,currentProcess.name,currentProcess.Color);
                     processStart =currentTime;
                     currentProcess = ReadyProcess.remove();
                     break;
                     }
 
                     else if (!Available.get(0).equals(currentProcess)){
-                    saveProcess(processStart,currentTime,currentProcess.name , currentProcess.Color);
+                    saveProcess(processStart,currentTime,currentProcess.name,currentProcess.Color);
                     processStart = currentTime;
                     currentProcess.dealQuantum();
+                    AG test = new AG();
+                    test.quantumTime = currentProcess.quantumTime;
+                    test.name = currentProcess.name;
+                    quantumHistory.add(test);
+                    quantumHistory.add(currentProcess);
                     currentProcess = Available.get(0);
                     break;
                     }
@@ -173,7 +200,7 @@ public class AG {
                 }
             }
 
-    }
+        }
         return outPut;
     }
 
@@ -203,13 +230,6 @@ public class AG {
         processesAWT.add(new AG(processes.get(i).arrivalTime,processes.get(i).burstTime,processes.get(i).name));
         outPut = SolveAG();
         outPut.sort(Comparator.comparing(save->save.name));
-        /*
-        System.out.println("name color begin end WT TAT");
-        for(int i=0 ; i < outPut.size();++i){
-            AG.save o = outPut.get(i);
-            System.out.println(o.name+ " "+o.color + " "+ o.AT+" " +  o.BT);
-        }
-        */
     }
     public double getAwt(){
         double AWT =0;
@@ -280,6 +300,12 @@ public class AG {
             AG tmp  = Available.get(i);
             Available.set(i,smaller);
             Available.set(index,tmp);
+        }
+    }
+
+    public void getQuantumHistory() {
+        for (int i=0; i<quantumHistory.size(); i++){
+            System.out.println(quantumHistory.get(i).name +" "+quantumHistory.get(i).quantumTime);
         }
     }
 }
