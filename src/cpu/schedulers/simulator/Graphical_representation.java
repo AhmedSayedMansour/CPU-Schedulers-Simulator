@@ -477,9 +477,9 @@ public class Graphical_representation extends javax.swing.JFrame {
                 shift += (tech3.save.get(i).CT - tech3.save.get(i).ST)*20;
             }
             /*AWT*/
-            AWT.setText(String.format( "%.3f", tech3.AWT));
+            AWT.setText(String.format( "%.3f", tech3.AvgWT));
             /*ATAT*/
-            ATAT.setText(String.format( "%.3f", tech3.ATAT));
+            ATAT.setText(String.format( "%.3f", tech3.AvgTAT));
         }
         else if(sel == 3){                                   /*Technique 4*/
             panelHistory.setVisible(true);

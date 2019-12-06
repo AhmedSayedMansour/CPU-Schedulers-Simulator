@@ -69,7 +69,7 @@ public class PriorityScheduling {
         }
 
     }
-    Double ATAT = 0.0, AWT = 0.0;
+    Double AvgTAT = 0.0, AvgWT = 0.0;
     ArrayList<Process> process = new ArrayList<>();
     ArrayList<save> save = new ArrayList<save>();
     int n = 0;
@@ -85,12 +85,12 @@ public class PriorityScheduling {
         }
         run();
         for (int i = 0; i < n; i++) {
-            ATAT += save.get(i).TT;
-            AWT += save.get(i).WT;
+            AvgTAT += save.get(i).TT;
+            AvgWT += save.get(i).WT;
         }
 
-        ATAT /= n;
-        AWT /= n;
+        AvgTAT /= n;
+        AvgWT /= n;
     }
 
     public void run() {
@@ -98,13 +98,11 @@ public class PriorityScheduling {
         PriorityQueue<Process> readyqueue = new PriorityQueue<Process>(new MyComparator());
         PriorityQueue<Process> WorkQueue = new PriorityQueue<Process>(new comp());
         for (int i = 0; i < n; i++) {
-
             readyqueue.add(process.get(i));
         }
-
         time = readyqueue.peek().AT;
-        while (!readyqueue.isEmpty()) {
 
+        while (!readyqueue.isEmpty()) {
             while (!readyqueue.isEmpty()) {
                 Process a = readyqueue.peek();
                 if (a.AT <= time) {
@@ -117,17 +115,20 @@ public class PriorityScheduling {
                     break;
                 }
             }
+            if (WorkQueue.isEmpty()) {
+                Process a = readyqueue.poll();
+                WorkQueue.add(a);
+                time = a.AT;
+            }
             Process c = WorkQueue.poll();
-            save b = new save();
-            b.setData(c.name, c.color, time, time + c.BT, time - c.AT, (time + c.BT) - c.AT);
-            save.add(b);
+            save i = new save();
+            i.setData(c.name, c.color, time, time + c.BT, time - c.AT, (time + c.BT) - c.AT);
+            save.add(i);
             time = time + c.BT;
             while (!WorkQueue.isEmpty()) {
                 Process a = WorkQueue.poll();
                 readyqueue.add(a);
             }
         }
-
     }
-
 }
