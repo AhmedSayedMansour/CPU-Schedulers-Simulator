@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 public class SRTF {
-    int context;
+    int context,lastend =0;
     ArrayList<Integer> arrivalTimes = new ArrayList<>();
     HashMap<String,Integer> BurstTimes = new HashMap<>();       //burst time for each process
     static ArrayList<save> processes = new ArrayList<save>();   //output
@@ -108,6 +108,7 @@ public class SRTF {
             processes.get(i).TAT = Double.parseDouble(Integer.toString(processes.get(i).ET - processes.get(i).arr)) ;
             processes.get(i).WT  = processes.get(i).TAT - BurstTimes.get(processes.get(i).name) ;
         }
+        lastend =processes.get(processes.size()-1).ET;
         processes.sort(comparator3);
         for (int i=0 ; i < processes.size() ; ++i){
             double valWT = processes.get(i).WT;

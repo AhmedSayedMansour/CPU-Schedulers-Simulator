@@ -1,82 +1,61 @@
 package cpu.schedulers.simulator;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
+import java.util.Comparator;
+ 
 public class NP_SJF {
-
-    ArrayList<String> Names = new ArrayList<>();
-    ArrayList<Integer> arrivalTimes = new ArrayList<>();
-    ArrayList<Integer> burstTimes = new ArrayList<>();
-    ArrayList<String> Colors = new ArrayList<>();
+ 
     static ArrayList<save> processes = new ArrayList<>();  //The output queue
-    double averageWaitingTime = 0, averageTurnaroundTime = 0;
-
-    NP_SJF(Input in) {
-        for (int i = 0; i < in.numberOfProcesses; i++) {
-            Names.add(in.names.get(i));
-            Colors.add(in.colors.get(i));
-            arrivalTimes.add(in.arrivalTimes.get(i));
-            burstTimes.add(in.burstTimes.get(i));
+    double averageWaitingTime = 0 , averageTurnaroundTime = 0;
+ 
+    NP_SJF(Input in)
+    {
+        for(int i=0 ; i<in.numberOfProcesses ; i++)
+        {
+            processes.add(new save(in.names.get(i) , in.colors.get(i) , in.arrivalTimes.get(i) , in.burstTimes.get(i)));
         }
         run();
     }
-
-    class save {
-
-        String name, color;
-        int arrivalTime, burstTime;
-        int waitingTime, turnAroundTime;
-        int endTime;
-
-        public void setData(String n, String col, int a, int b) {
+    class save{
+        String name , color;
+        int arrivalTime , burstTime;
+        int waitingTime , turnAroundTime;
+        int beginTime , endTime;
+ 
+        save(String n , String col, int a , int b)
+        {
             name = n;
             color = col;
             arrivalTime = a;
             burstTime = b;
         }
-
-        public void setTimes() {
-            turnAroundTime = endTime - arrivalTime;
-            waitingTime = turnAroundTime - burstTime;
-        }
     }
-
-    public void run() {
-        int end = Collections.min(arrivalTimes);
-        while (arrivalTimes.size() != 0) {
-            int small = 0;
-            //Get the smallest arrival time
-            for (int i = 1; i < arrivalTimes.size(); i++) {
-                if (arrivalTimes.get(i) < arrivalTimes.get(small)) {
-                    small = i;
-                }
-            }
-            //Check if there any process with the same arrival time but with a smaller burst time than this process
-            for (int i = 0; i < arrivalTimes.size(); i++) {
-                if (arrivalTimes.get(i) == arrivalTimes.get(small) && burstTimes.get(i) < burstTimes.get(small)) {
-                    small = i;
-                }
-            }
-
-            // Save processes
-            save obj = new save();
-            obj.setData(Names.get(small), Colors.get(small), arrivalTimes.get(small), burstTimes.get(small));
-            obj.endTime = end + obj.burstTime;
-            obj.setTimes();
-            end = obj.endTime;
-            //Add the selected process to queue
-            processes.add(obj);
-
-            // Remove the finished process
-            arrivalTimes.remove(small);
-            burstTimes.remove(small);
-            Names.remove(small);
-            Colors.remove(small);
+ 
+    public void run()
+    {
+        Comparator<save> comparator = Comparator.comparing(save->save.arrivalTime);
+        comparator = comparator.thenComparing(save->save.burstTime);
+ 
+        processes.sort(comparator);
+ 
+        int lastProcess = 0;
+        for (int i=0 ; i<processes.size() ; i++)
+        {
+            if(processes.get(i).arrivalTime <= lastProcess)
+                processes.get(i).beginTime = lastProcess;
+            else
+                processes.get(i).beginTime = lastProcess + processes.get(i).arrivalTime;
+            processes.get(i).endTime = processes.get(i).beginTime + processes.get(i).burstTime;
+ 
+            lastProcess = processes.get(i).endTime;
+ 
+            processes.get(i).turnAroundTime = processes.get(i).endTime - processes.get(i).arrivalTime;
+            processes.get(i).waitingTime = processes.get(i).turnAroundTime - processes.get(i).burstTime;
         }
-        // Calculate Average waiting and turnaround time
-        for (int i = 0; i < processes.size(); i++) {
+ 
+        //Calculate Average waiting and turnaround time
+        for(int i=0 ; i<processes.size() ; i++)
+        {
             averageTurnaroundTime += processes.get(i).turnAroundTime;
             averageWaitingTime += processes.get(i).waitingTime;
         }

@@ -229,7 +229,6 @@ public class AG {
         for (int i=0; i<processes.size(); i++)
         processesAWT.add(new AG(processes.get(i).arrivalTime,processes.get(i).burstTime,processes.get(i).name));
         outPut = SolveAG();
-        outPut.sort(Comparator.comparing(save->save.name));
     }
     public double getAwt(){
         double AWT =0;

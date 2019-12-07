@@ -5,13 +5,17 @@
  */
 package cpu.schedulers.simulator;
 
+import java.awt.Color;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 public class Graphical_representation extends javax.swing.JFrame {
@@ -21,6 +25,7 @@ public class Graphical_representation extends javax.swing.JFrame {
     SRTF tech2 = new SRTF(obj.in);
     PriorityScheduling tech3 = new PriorityScheduling(obj.in);
     AG tech4 = new AG(obj.in);
+    boolean Run = false;
     /*
     Input in = new Input();
     NP_SJF tech1 = new NP_SJF(in);
@@ -366,14 +371,32 @@ public class Graphical_representation extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
+    public void seperat(JPanel pane,int i){
+        JSeparator sep = new JSeparator(SwingConstants.VERTICAL);
+        sep.setBounds(60+i*20, 0, 1, obj.in.numberOfProcesses * 50);
+        if      (i%5 == 0)sep.setForeground(Color.BLACK);
+        else    sep.setForeground(new Color(128,128,128));
+        pane.add(sep);
+    }
+    
     private void runActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runActionPerformed
         // TODO add your handling code here:
+        int end = Math.max(Math.max(Math.max(tech1.processes.get(tech1.processes.size()-1).endTime ,tech2.lastend ),tech3.save.get(tech3.save.size()-1).CT ),tech4.outPut.get(tech4.outPut.size()-1).BT );
+        for(int i=0 ; i<end+2+obj.in.arrivalTimes.get(0) ;++i){
+            seperat(NP_SJF, i);
+            seperat(SRTF, i);
+            seperat(NP_PS, i);
+            seperat(AG, i);
+        }
+        tech1.processes.sort(Comparator.comparing(save->save.name));
+        tech3.save.sort(Comparator.comparing(save->save.name));
+        tech4.outPut.sort(Comparator.comparing(save->save.name));
+        Run = true;
         panelHistory.setVisible(false);
         model.setRowCount(0);
         /*Technique 1*/
         JLabel labName;
         int pos = 50;
-        int shift = 0;
         JLabel labIcon;
         for(int i=0 ; i<tech1.processes.size() ; ++i){
             labName = new JLabel();
@@ -384,9 +407,8 @@ public class Graphical_representation extends javax.swing.JFrame {
             
             labIcon.setIcon(new ImageIcon("D:\\Education\\Java\\CPU-Schedulers-Simulator\\colors" + "\\"+ tech1.processes.get(i).color + ".jpg"));
             NP_SJF.add(labIcon);
-            labIcon.setBounds(new Rectangle(new Point(60 + shift ,i*pos+10) , labIcon.getPreferredSize()));
+            labIcon.setBounds(new Rectangle(new Point(60 + tech1.processes.get(i).beginTime *20 ,i*pos+10) , labIcon.getPreferredSize()));
             labIcon.setSize( tech1.processes.get(i).burstTime*20 ,15);
-            shift += tech1.processes.get(i).burstTime*20;
         }
         
         /*Table*/
@@ -404,14 +426,14 @@ public class Graphical_representation extends javax.swing.JFrame {
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         // TODO add your handling code here:
         int sel = jTabbedPane1.getSelectedIndex();
-        if(sel == 0){                       /*Technique 1*/
+        if(sel == 0 && Run){                       /*Technique 1*/
             panelHistory.setVisible(false);
             /*AWT*/
             AWT.setText(String.format( "%.3f", tech1.averageWaitingTime));
             /*ATAT*/
             ATAT.setText(String.format( "%.3f",  tech1.averageTurnaroundTime));
         }
-        else if(sel == 1)                   /*Technique 2*/
+        else if(sel == 1 && Run)                   /*Technique 2*/
         {
             panelHistory.setVisible(false);
             JLabel labName;
@@ -457,7 +479,7 @@ public class Graphical_representation extends javax.swing.JFrame {
             /*ATAT*/
             ATAT.setText(String.format( "%.3f", tech2.ATAT));
         }
-        else if(sel == 2)  {                    /*Technique 3*/
+        else if(sel == 2 && Run)  {                    /*Technique 3*/
             panelHistory.setVisible(false);
             JLabel labName;
             int pos = 50;
@@ -481,7 +503,7 @@ public class Graphical_representation extends javax.swing.JFrame {
             /*ATAT*/
             ATAT.setText(String.format( "%.3f", tech3.AvgTAT));
         }
-        else if(sel == 3){                                   /*Technique 4*/
+        else if(sel == 3 && Run){                                   /*Technique 4*/
             panelHistory.setVisible(true);
             JLabel labName;
             JLabel labIcon;

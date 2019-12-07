@@ -5,40 +5,24 @@ import java.util.*;
 public class PriorityScheduling {
 
     class save {
-
         String name, color;
         int ST, CT, WT, TT;
-
         public void setData(String a, String col, int b, int c, int d, int e) {
-            name = a;
-            color = col;
-            ST = b;
-            CT = c;
-            WT = d;
-            TT = e;
+            name = a; color = col; ST = b; CT = c; WT = d; TT = e;
         }
     }
 
     class Process {
-
         String name, color;
         int AT, BT, p;
-
         public void setData(String a, String col, int b, int c, int d) {
-            name = a;
-            color = col;
-            AT = b;
-            BT = c;
-            p = d;
+            name = a;  color = col; AT = b; BT = c; p = d;
         }
-
     }
 
     class MyComparator implements Comparator {
-
         @Override
         public int compare(Object o1, Object o2) {
-
             Process p1 = (Process) o1;
             Process p2 = (Process) o2;
             if (p1.AT < p2.AT) {
@@ -54,7 +38,6 @@ public class PriorityScheduling {
     }
 
     class comp implements Comparator {
-
         @Override
         public int compare(Object o1, Object o2) {
             Process p1 = (Process) o1;
@@ -67,7 +50,6 @@ public class PriorityScheduling {
                 return 1;
             }
         }
-
     }
     Double AvgTAT = 0.0, AvgWT = 0.0;
     ArrayList<Process> process = new ArrayList<>();
@@ -101,7 +83,6 @@ public class PriorityScheduling {
             readyqueue.add(process.get(i));
         }
         time = readyqueue.peek().AT;
-
         while (!readyqueue.isEmpty()) {
             while (!readyqueue.isEmpty()) {
                 Process a = readyqueue.peek();
